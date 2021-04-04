@@ -126,19 +126,13 @@ const Hero = ({ content }) => {
             </div>
             {frontmatter.title}
           </h1>
-          <h2 className="subtitle">
-            {frontmatter.subtitlePrefix}{" "}
-            <AnimatedUnderlining animate={uControls} big>
-              {frontmatter.subtitle}
-            </AnimatedUnderlining>
-          </h2>
           <div className="description">
             <MDXRenderer>{body}</MDXRenderer>
           </div>
         </motion.div>
-        <motion.div initial={{ opacity: 0, x: 20 }} animate={sControls}>
+        {/* <motion.div initial={{ opacity: 0, x: 20 }} animate={sControls}>
           <Social fontSize=".95rem" padding=".3rem 1.25rem" width="auto" />
-        </motion.div>
+        </motion.div> */}
       </StyledContentWrapper>
     </StyledSection>
   )

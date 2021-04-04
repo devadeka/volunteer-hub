@@ -74,7 +74,6 @@ export const pageQuery = graphql`
             greetings
             title
             subtitlePrefix
-            subtitle
             icon {
               childImageSharp {
                 fluid(maxWidth: 60, quality: 90) {
