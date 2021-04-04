@@ -14,6 +14,8 @@ import Contact from "../components/sections/contact"
 import { seoTitleSuffix } from "../../config"
 
 const IndexPage = ({ data }) => {
+  console.log("DATA", data)
+
   const { frontmatter } = data.index.edges[0].node
   const { seoTitle, useSeoTitleSuffix, useSplashScreen } = frontmatter
 
@@ -36,10 +38,7 @@ const IndexPage = ({ data }) => {
           }
         />
         <Hero content={data.hero.edges} />
-        {/* Articles is populated via Medium RSS Feed fetch */}
-        <Articles />
         <About content={data.about.edges} />
-        <Interests content={data.interests.edges} />
         <Projects content={data.projects.edges} />
         <Contact content={data.contact.edges} />
       </Layout>
@@ -92,6 +91,7 @@ export const pageQuery = graphql`
           body
           frontmatter {
             title
+            prop
             image {
               childImageSharp {
                 fluid(maxWidth: 400, quality: 90) {

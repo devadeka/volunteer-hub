@@ -16,6 +16,13 @@ const StyledSection = styled.section`
   margin-top: 4rem;
 `
 
+const AboutContainer = styled(ContentWrapper)`
+  && {
+    display: flex;
+    flex-direction: row;
+  }
+`
+
 const StyledContentWrapper = styled(ContentWrapper)`
   && {
     width: 100%;
@@ -24,7 +31,7 @@ const StyledContentWrapper = styled(ContentWrapper)`
     flex-direction: column;
     justify-content: space-between;
     @media (min-width: ${({ theme }) => theme.breakpoints.sm}) {
-      flex-direction: row;
+      flex-direction: column;
       justify-content: space-between;
     }
     .section-title {
@@ -63,54 +70,62 @@ const StyledContentWrapper = styled(ContentWrapper)`
 `
 
 const About = ({ content }) => {
-  const { frontmatter, body } = content[0].node
-  const { isIntroDone } = useContext(Context).state
-  const tControls = useAnimation()
-  const iControls = useAnimation()
-
-  // Required for animating the text content
-  const tRef = useRef()
-  const tOnScreen = useOnScreen(tRef)
-
-  // Required for animating the image
-  const iRef = useRef()
-  const iOnScreen = useOnScreen(iRef)
-
-  // Only trigger animations if the intro is done or disabled
-  useEffect(() => {
-    if (isIntroDone) {
-      if (tOnScreen) tControls.start({ opacity: 1, y: 0 })
-      if (iOnScreen) iControls.start({ opacity: 1, x: 0 })
-    }
-  }, [isIntroDone, tControls, iControls, tOnScreen, iOnScreen])
-
   return (
-    <StyledSection id="about">
-      <StyledContentWrapper>
-        <motion.div
-          className="inner-wrapper"
-          ref={tRef}
-          initial={{ opacity: 0, y: 20 }}
-          animate={tControls}
-        >
-          <h3 className="section-title">{frontmatter.title}</h3>
-          <div className="text-content">
-            <MDXRenderer>{body}</MDXRenderer>
-          </div>
-        </motion.div>
-        <motion.div
-          className="image-content"
-          ref={iRef}
-          initial={{ opacity: 0, x: 20 }}
-          animate={iControls}
-        >
-          <Img
-            className="about-author"
-            fluid={frontmatter.image.childImageSharp.fluid}
-          />
-        </motion.div>
-      </StyledContentWrapper>
-    </StyledSection>
+    <>
+      <AboutContainer>
+        {content.map((c, idx) => {
+          const { frontmatter, body } = c.node
+          const { isIntroDone } = useContext(Context).state
+          const tControls = useAnimation()
+          const iControls = useAnimation()
+
+          // Required for animating the text content
+          const tRef = useRef()
+          const tOnScreen = useOnScreen(tRef)
+
+          // Required for animating the image
+          const iRef = useRef()
+          const iOnScreen = useOnScreen(iRef)
+
+          // Only trigger animations if the intro is done or disabled
+          useEffect(() => {
+            if (isIntroDone) {
+              if (tOnScreen) tControls.start({ opacity: 1, y: 0 })
+              if (iOnScreen) iControls.start({ opacity: 1, x: 0 })
+            }
+          }, [isIntroDone, tControls, iControls, tOnScreen, iOnScreen])
+
+          return (
+            <StyledSection id="about">
+              <StyledContentWrapper>
+                <motion.div
+                  className="inner-wrapper"
+                  ref={tRef}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={tControls}
+                >
+                  <h3 className="section-title">{frontmatter.title}</h3>
+                  <div className="text-content">
+                    <MDXRenderer>{body}</MDXRenderer>
+                  </div>
+                </motion.div>
+                <motion.div
+                  className="image-content"
+                  ref={iRef}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={iControls}
+                >
+                  <Img
+                    className="about-author"
+                    fluid={frontmatter.image.childImageSharp.fluid}
+                  />
+                </motion.div>
+              </StyledContentWrapper>
+            </StyledSection>
+          )
+        })}
+      </AboutContainer>
+    </>
   )
 }
 
