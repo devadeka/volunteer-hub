@@ -83,5 +83,11 @@ module.exports = {
         },
       },
     },
+    {
+      resolve: `gatsby-plugin-s3`,
+      options: {
+        bucketName: "www.volunteer-hub.devatanu.com",
+      },
+    },
   ],
 }
