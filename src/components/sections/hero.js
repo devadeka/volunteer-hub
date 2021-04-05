@@ -51,12 +51,10 @@ const StyledContentWrapper = styled(ContentWrapper)`
         margin-bottom: 0;
       }
     }
-    .subtitle {
-      margin-top: -0.75rem;
-    }
     .description {
       font-size: 1rem;
       margin-bottom: 2rem;
+      padding-top: 0.5rem;
     }
   }
 `
