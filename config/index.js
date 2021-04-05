@@ -1,14 +1,13 @@
 module.exports = {
   //-- SITE SETTINGS -----
-  author: "@konstantinmuenster",
-  siteTitle: "Gatsby Starter Portfolio Minimal",
-  siteShortTitle: "Gatsby", // Used as logo text in header, footer, and splash screen
-  siteDescription:
-    "A modern one-page portfolio with a clean yet expressive design.",
-  siteUrl: "https://gatsby-starter-portfolio-minimal.netlify.app/",
+  author: "@Deva Deka & @Steve Watts",
+  siteTitle: "Volunteer Hub",
+  siteShortTitle: "AWS", // Used as logo text in header, footer, and splash screen
+  siteDescription: "A website for individuals to request help with AWS",
+  siteUrl: "https://volunteer-hub.devatanu.com/",
   siteLanguage: "en_US",
   siteIcon: "content/favicon.png", // Relative to gatsby-config file
-  seoTitleSuffix: "Portfolio Minimal", // SEO title syntax will be e.g. "Imprint - {seoTitleSuffix}"
+  seoTitleSuffix: "Volunteering AWS help", // SEO title syntax will be e.g. "Imprint - {seoTitleSuffix}"
   useCookieBar: false, // If you use Google Analytics and want to be GDPR-compliant, set it to true
   googleAnalyticsTrackingId: "", // e.g. UA-XXXXXX-X
 
@@ -54,11 +53,15 @@ module.exports = {
 
   //-- SOCIAL MEDIA SETTINGS -----
   // There are icons available for the following platforms:
-  // Medium, GitHub, LinkedIn, XING, Behance, E-Mail
+  // Medium, GitHub, LinkedIn
   socialMedia: [
     {
-      name: "Linkedin",
-      url: "https://www.linkedin.com/in/konstantin-muenster/",
+      name: "Linkedin - Devatanu",
+      url: "https://www.linkedin.com/in/devatanu-deka/",
+    },
+    {
+      name: "Linkedin - Steve",
+      url: "https://www.linkedin.com/in/stephengwatts/",
     },
     {
       name: "Medium",
@@ -67,16 +70,8 @@ module.exports = {
     {
       name: "Github",
       url:
-        "https://github.com/konstantinmuenster/gatsby-starter-portfolio-minimal",
+        "https://github.com/devadeka/volunteer-hub",
     },
-    {
-      name: "Behance",
-      url: "https://www.behance.net/konstanmnster",
-    },
-    // {
-    //   name: "Mail",
-    //   url: "mailto:mail@konstantin.digital",
-    // },
   ],
 
   //-- NAVIGATION SETTINGS -----
