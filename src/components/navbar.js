@@ -8,8 +8,7 @@ const StyledNav = styled.nav`
   display: none;
   @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: flex-end;
     width: 31.25rem;
     background: ${({ theme }) => theme.colors.background};
     a {
@@ -22,6 +21,7 @@ const StyledNav = styled.nav`
     text-align: center;
     position: relative;
     padding: 0;
+    margin-right: 1rem;
     &::before {
       transition: 200ms ease-out;
       height: 0.1563rem;
@@ -34,6 +34,8 @@ const StyledNav = styled.nav`
     &:hover::before {
       width: 100%;
     }
+    &:last-child {
+      margin-right: 0;
     }
   }
 `
