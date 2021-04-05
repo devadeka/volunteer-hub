@@ -71,9 +71,7 @@ export const pageQuery = graphql`
         node {
           body
           frontmatter {
-            greetings
             title
-            subtitlePrefix
             icon {
               childImageSharp {
                 fluid(maxWidth: 60, quality: 90) {
