@@ -30,8 +30,8 @@ const StyledButton = styled.button`
   }
 `
 
-const Button = ({ onClick, textAlign, center, children }) => (
-  <StyledButton onClick={onClick} textAlign={textAlign} center={center}>
+const Button = ({ onClick, textAlign, center, children, disabled }) => (
+  <StyledButton onClick={onClick} textAlign={textAlign} center={center} disabled={disabled}>
     {children}
   </StyledButton>
 )
@@ -40,6 +40,7 @@ Button.propTypes = {
   onClick: PropTypes.func,
   textAlign: PropTypes.string,
   center: PropTypes.bool,
+  disabled: PropTypes.bool,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
