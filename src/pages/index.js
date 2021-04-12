@@ -11,6 +11,7 @@ import About from "../components/sections/about"
 import Interests from "../components/sections/interests"
 import Projects from "../components/sections/projects"
 import Contact from "../components/sections/contact"
+import Form from "../components/sections/form"
 import { seoTitleSuffix } from "../../config"
 
 const IndexPage = ({ data }) => {
@@ -42,6 +43,7 @@ const IndexPage = ({ data }) => {
         <Interests content={data.interests.edges} />
         <Projects content={data.projects.edges} />
         <Contact content={data.contact.edges} />
+        <Form />
       </Layout>
     </GlobalStateProvider>
   )
