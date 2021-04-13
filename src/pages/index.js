@@ -43,7 +43,7 @@ const IndexPage = ({ data }) => {
         <Interests content={data.interests.edges} />
         <Projects content={data.projects.edges} />
         <Contact content={data.contact.edges} />
-        <Form />
+        <Form content={data.form.edges}/>
       </Layout>
     </GlobalStateProvider>
   )
@@ -178,6 +178,21 @@ export const pageQuery = graphql`
                 }
               }
             }
+          }
+        }
+      }
+    }
+    form: allMdx(
+      filter: { fileAbsolutePath: { regex: "/index/form/" } }
+    ) {
+      edges {
+        node {
+          body
+          frontmatter {
+            nameError
+            emailError
+            requestError
+            successfulFormSubmission
           }
         }
       }

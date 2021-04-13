@@ -117,8 +117,10 @@ const initialState = {
 
 const GATEWAY_URL = process.env.GATSBY_SUBMISSION_URL
 
-const Form = () => {
+const Form = ({ content })  => {
 	const [state, dispatch] = useReducer(formReducer, initialState);
+	const { body, frontmatter } = content[0].node
+
 
 	const handleSubmit = async event => {
 	event.preventDefault();
@@ -202,19 +204,19 @@ const Form = () => {
 		  case "name":
 			if (!value || value.length <= 0) {
 			  hasError = true
-			  error = "Please provide your name"
+			  error = frontmatter.nameError
 			}
 			break
 		  case "email":
 				if (!value || value.length <= 0) {
 				  hasError = true
-				  error = "Please provide your email"
+				  error = frontmatter.emailError
 				}
 				break		  
 		  case "request":
 				if (!value || value.length <= 0) {
 				  hasError = true
-				  error = "Please provide the details of what you would like help with"
+				  error = frontmatter.requestError
 				}
 				break
 		  default:
@@ -228,7 +230,7 @@ const Form = () => {
 		<form onSubmit={handleSubmit}>
 		  <div>
 		  	{state.submissionError.length > 0 && (<p>{state.submissionError}</p>)}
-			{state.formSubmitted && <p>Your request was successfully submitted. We will be in touch shortly!</p>}
+			{state.formSubmitted && <p>{frontmatter.successfulFormSubmission}</p>}
 		  </div>
 		  <StyledFieldSet>
 			<StyledSpan>
