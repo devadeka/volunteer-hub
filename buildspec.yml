@@ -1,0 +1,39 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      # install Node 15
+      - echo Installing Node 15.x ...
+      - curl -fsSL https://deb.nodesource.com/setup_15.x | bash -
+      - apt install -y nodejs
+
+      - echo Installing Yarn ...
+      - curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+      - echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+      - apt install --no-install-recommends yarn
+
+      - echo Installing GatsbyCLI ...
+      - npm install -g gatsby-cli
+
+  pre_build:
+    commands:
+      - echo Installing GatsbyCLI ...
+      - yarn
+
+  build:
+    commands:
+      - echo Who even tests anways
+      - echo Building ...
+      - gatsby build
+
+  post_build:
+    commands:
+      - aws cloudfront create-invalidation --distribution-id "${WWW_VH_CloudFrontID}" --paths '/*'
+      - aws cloudfront create-invalidation --distribution-id "${VH_CloudFrontID}" --paths '/*'
+
+artifacts:
+  files:
+    - "**/*"
+  discard-paths: no
+  base-directory: public
