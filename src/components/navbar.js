@@ -8,8 +8,7 @@ const StyledNav = styled.nav`
   display: none;
   @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: flex-end;
     width: 31.25rem;
     background: ${({ theme }) => theme.colors.background};
     a {
@@ -22,6 +21,7 @@ const StyledNav = styled.nav`
     text-align: center;
     position: relative;
     padding: 0;
+    margin-right: 1rem;
     &::before {
       transition: 200ms ease-out;
       height: 0.1563rem;
@@ -34,27 +34,14 @@ const StyledNav = styled.nav`
     &:hover::before {
       width: 100%;
     }
-  }
-  .cta-btn {
-    width: auto;
-    height: auto;
-    font-weight: 700;
-    border-radius: ${({ theme }) => theme.borderRadius};
-    border: 0.125rem solid ${({ theme }) => theme.colors.primary};
-    background: ${({ theme }) => theme.colors.background};
-    transition: 20ms ease-out;
-    font-size: 1rem;
-    padding: 0.5rem 1.5rem;
-    margin: 0;
-    &:hover {
-      background: ${({ theme }) => theme.colors.primary};
-      color: ${({ theme }) => theme.colors.background};
+    &:last-child {
+      margin-right: 0;
     }
   }
 `
 
 const Navbar = () => {
-  const { menu, button } = navLinks
+  const { menu } = navLinks
   return (
     <StyledNav>
       {menu.map(({ name, url }, key) => {
@@ -64,20 +51,6 @@ const Navbar = () => {
           </Link>
         )
       })}
-      {button.useFileName ? (
-        <a
-          className="cta-btn"
-          href={`/${button.fileName}`}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {button.name}
-        </a>
-      ) : (
-        <Link className="cta-btn" to={button.url}>
-          {button.name}
-        </Link>
-      )}
     </StyledNav>
   )
 }

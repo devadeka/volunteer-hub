@@ -51,27 +51,20 @@ const StyledContentWrapper = styled(ContentWrapper)`
         margin-bottom: 0;
       }
     }
-    .subtitle {
-      margin-top: -0.75rem;
-    }
     .description {
-      font-size: 1.125rem;
+      font-size: 1rem;
       margin-bottom: 2rem;
+      padding-top: 0.5rem;
     }
   }
 `
-
-const AnimatedUnderlining = motion.custom(Underlining)
 
 const Hero = ({ content }) => {
   const { frontmatter, body } = content[0].node
   const { isIntroDone, darkMode } = useContext(Context).state
 
-  // Controls to orchestrate animations of greetings, emoji, social profiles, underlining
-  const gControls = useAnimation()
+  // Controls to orchestrate animations of emoji
   const eControls = useAnimation()
-  const sControls = useAnimation()
-  const uControls = useAnimation()
 
   // Start Animations after the splashScreen sequence is done
   useEffect(() => {
@@ -81,39 +74,18 @@ const Hero = ({ content }) => {
           rotate: [0, -10, 12, -10, 9, 0, 0, 0, 0, 0, 0],
           transition: { duration: 2.5, loop: 3, repeatDelay: 1 },
         })
-        await gControls.start({
-          opacity: 1,
-          y: 0,
-          transition: { delay: 0.4 },
-        })
-        await sControls.start({
-          opacity: 1,
-          x: 0,
-        })
-        // Animate underlining to hover state
-        await uControls.start({
-          boxShadow: `inset 0 -2rem 0 ${
-            darkMode ? darkTheme.colors.secondary : lightTheme.colors.secondary
-          }`,
-          transition: { delay: 0.4, ease: "circOut" },
-        })
       }
     }
     pageLoadSequence()
-  }, [isIntroDone, darkMode, eControls, gControls, sControls, uControls])
+  }, [isIntroDone, darkMode, eControls])
 
   return (
     <StyledSection id="hero">
       {!isIntroDone && <SplashScreen />}
       <StyledContentWrapper>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={gControls}
-          data-testid="animated-heading"
-        >
           <h1 className="title">
             <div className="greetings">
-              {frontmatter.greetings}
+              {frontmatter.title}
               <motion.div
                 animate={eControls}
                 style={{ originX: 0.7, originY: 0.7 }}
@@ -124,21 +96,10 @@ const Hero = ({ content }) => {
                 />
               </motion.div>
             </div>
-            {frontmatter.title}
           </h1>
-          <h2 className="subtitle">
-            {frontmatter.subtitlePrefix}{" "}
-            <AnimatedUnderlining animate={uControls} big>
-              {frontmatter.subtitle}
-            </AnimatedUnderlining>
-          </h2>
           <div className="description">
             <MDXRenderer>{body}</MDXRenderer>
           </div>
-        </motion.div>
-        <motion.div initial={{ opacity: 0, x: 20 }} animate={sControls}>
-          <Social fontSize=".95rem" padding=".3rem 1.25rem" width="auto" />
-        </motion.div>
       </StyledContentWrapper>
     </StyledSection>
   )
