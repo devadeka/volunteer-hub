@@ -27,6 +27,11 @@ phases:
       - echo Building ...
       - gatsby build
 
+  post_build:
+    commands:
+      - aws cloudfront create-invalidation --distribution-id "${WWW_VH_CloudFrontID}" --paths '/*'
+      - aws cloudfront create-invalidation --distribution-id "${VH_CloudFrontID}" --paths '/*'
+
 artifacts:
   files:
     - "**/*"
