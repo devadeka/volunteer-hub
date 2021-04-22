@@ -27,8 +27,8 @@ phases:
       - echo Building ...
       - gatsby build
 
-  artifacts:
-    files:
-      - "**/*"
-    discard-paths: no
-    base-directory: public
+artifacts:
+  files:
+    - "**/*"
+  discard-paths: no
+  base-directory: public
