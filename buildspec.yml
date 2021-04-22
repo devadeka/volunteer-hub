@@ -16,11 +16,6 @@ phases:
       - echo Installing GatsbyCLI ...
       - npm install -g gatsby-cli
 
-      -echo Installing AWS CLI ...
-      - curl “https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip” -o “awscliv2.zip”
-      - unzip awscliv2.zip
-      - ./aws/install
-
   pre_build:
     commands:
       - echo Installing GatsbyCLI ...
@@ -34,8 +29,8 @@ phases:
 
   post_build:
     commands:
-      - aws cloudfront create-invalidation --distribution-id E2176B7XVARM0W --paths **/*
-      - aws cloudfront create-invalidation --distribution-id EGYW9Z8BAOQN1 --paths **/*
+      - aws cloudfront create-invalidation --distribution-id "${WWW_VH_CloudFrontID}" --paths '/*'
+      - aws cloudfront create-invalidation --distribution-id "${VH_CloudFrontID}" --paths '/*'
 
 artifacts:
   files:
